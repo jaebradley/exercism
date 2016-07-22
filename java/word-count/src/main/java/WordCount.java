@@ -13,13 +13,9 @@ public class WordCount {
     int nextWordTerminatorIndex = 0;
     int startIndexOfNextPhrase = 0;
     String substring = phrase;
-    while (nextWordTerminatorIndex < phrase.length() && startIndexOfNextPhrase < phrase.length()) {
+    while (nextWordTerminatorIndex < substring.length() && startIndexOfNextPhrase < substring.length()) {
       startIndexOfNextPhrase = getRelativeIndexOfNextNonWordTerminator(substring.substring(startIndexOfNextPhrase));
       nextWordTerminatorIndex = getRelativeIndexOfNextWordTerminator(substring.substring(startIndexOfNextPhrase));
-
-      if (startIndexOfNextPhrase == phrase.length() - 1 || nextWordTerminatorIndex == phrase.length() - 1) {
-        return wordCountMap;
-      }
 
       String word = substring.substring(startIndexOfNextPhrase, nextWordTerminatorIndex + 1);
       substring = substring.substring(startIndexOfNextPhrase);
@@ -50,7 +46,7 @@ public class WordCount {
     return chars.length - 1;
   }
 
-  public void incrementWordCount(final Map<String, Integer> wordCountMap, final String word) {
+  private static void incrementWordCount(final Map<String, Integer> wordCountMap, final String word) {
     final Integer count = wordCountMap.get(word);
     if (count == null) {
       wordCountMap.put(word, 1);
