@@ -14,11 +14,11 @@ public class WordCount {
     int startIndexOfNextPhrase = 0;
     String substring = phrase;
     while (nextWordTerminatorIndex < substring.length() && startIndexOfNextPhrase < substring.length()) {
-      startIndexOfNextPhrase = getRelativeIndexOfNextNonWordTerminator(substring.substring(startIndexOfNextPhrase));
+      startIndexOfNextPhrase = getRelativeIndexOfNextNonWordTerminator(substring.substring(nextWordTerminatorIndex));
       nextWordTerminatorIndex = getRelativeIndexOfNextWordTerminator(substring.substring(startIndexOfNextPhrase));
 
       String word = substring.substring(startIndexOfNextPhrase, nextWordTerminatorIndex + 1);
-      substring = substring.substring(startIndexOfNextPhrase);
+      substring = substring.substring(nextWordTerminatorIndex);
       incrementWordCount(wordCountMap, word);
     }
     return wordCountMap;
