@@ -1,13 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Robot {
-
-  private static final List<Character> ALPHABET = new ArrayList<Character>(
-          Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
-                        'T', 'U', 'V', 'W', 'X', 'Y', 'Z')
-  );
 
   private String name;
 
@@ -32,7 +23,10 @@ public class Robot {
   }
 
   private char generateRandomAlphabeticChar() {
-    int alphabeticIndex = new Double(Math.floor(Math.random() * 26)).intValue();
-    return ALPHABET.get(alphabeticIndex);
+    int alphabeticIndex = new Double(Math.floor(Math.random() * 26)).intValue() + 'A';
+    if (!Character.isLetter(alphabeticIndex) && Character.isUpperCase(alphabeticIndex)) {
+      throw new IllegalStateException(String.format("%s does not point to an upper-case letter", alphabeticIndex));
+    }
+   return (char) alphabeticIndex;
   }
 }
