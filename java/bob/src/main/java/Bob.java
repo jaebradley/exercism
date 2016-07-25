@@ -9,18 +9,38 @@ public class Bob {
   }
 
   public String hey(final String s) {
-    if (s.contains("?")) {
+    String trimmedStatement = s.trim();
+
+    if (isQuestion(trimmedStatement)) {
       return QUSTION_RESPONSE;
     }
 
-    if (s.contains("!")) {
+    if (isYelling(trimmedStatement)) {
       return EXCLAMATION_RESPONSE;
     }
 
-    if (s.isEmpty()) {
+    if (trimmedStatement.isEmpty()) {
       return EMPTY_RESPONSE;
     }
 
     return DEFAULT_RESPONSE;
+  }
+
+  private static boolean isQuestion(final String s) {
+    return s.contains("?") && !isYelling(s);
+  }
+
+  private static boolean isYelling(final String s) {
+    return s.contains("!") || allAlphabeticCharactersAreUpperCase(s);
+  }
+
+  private static boolean allAlphabeticCharactersAreUpperCase(final String s) {
+    for (char c : s.toCharArray()) {
+      if (Character.isAlphabetic(c) && !Character.isUpperCase(c)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
