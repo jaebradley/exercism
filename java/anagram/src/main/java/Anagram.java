@@ -19,47 +19,11 @@ public class Anagram {
     final List<String> matches = new ArrayList<>();
     final Map<Character, Integer> anagramCharacterCounts = generateCharacterCount(value);
     for (final String potentialMatch : potentialMatches) {
-      if (!potentialMatch.equals(value) && isMatch(anagramCharacterCounts, generateCharacterCount(potentialMatch))) {
+      if (!potentialMatch.equals(value) && anagramCharacterCounts.equals(generateCharacterCount(potentialMatch))) {
         matches.add(potentialMatch);
       }
     }
     return matches;
-  }
-
-  private static boolean isMatch(final Map<Character, Integer> anagramCharacterCount, final Map<Character, Integer> potentialMatchCharacterCount) {
-    for (Map.Entry<Character, Integer> entry : anagramCharacterCount.entrySet()) {
-      Integer value = null;
-
-      if (potentialMatchCharacterCount.containsKey(Character.toUpperCase(entry.getKey()))) {
-        value = potentialMatchCharacterCount.get(Character.toUpperCase(entry.getKey()));
-      }
-
-      if (potentialMatchCharacterCount.containsKey(Character.toLowerCase(entry.getKey()))) {
-        value = potentialMatchCharacterCount.get(Character.toLowerCase(entry.getKey()));
-      }
-
-      if (value == null || value.compareTo(entry.getValue()) != 0) {
-        return false;
-      }
-    }
-
-    for (Map.Entry<Character, Integer> entry : potentialMatchCharacterCount.entrySet()) {
-      Integer value = null;
-
-      if (anagramCharacterCount.containsKey(Character.toUpperCase(entry.getKey()))) {
-        value = anagramCharacterCount.get(Character.toUpperCase(entry.getKey()));
-      }
-
-      if (anagramCharacterCount.containsKey(Character.toLowerCase(entry.getKey()))) {
-        value = anagramCharacterCount.get(Character.toLowerCase(entry.getKey()));
-      }
-
-      if (value == null || value.compareTo(entry.getValue()) != 0) {
-        return false;
-      }
-    }
-
-    return true;
   }
 
   private static Map<Character, Integer> generateCharacterCount(final String value) {
