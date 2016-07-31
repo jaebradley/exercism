@@ -17,8 +17,8 @@ public class SieveTest {
 
     @Test
     public void findPrimesUpTo10() {
-        Sieve sieve = new Sieve(10);
-        List<Integer> expectedOutput = Arrays.asList(2, 3, 5, 7);
+        Sieve sieve = new Sieve(3);
+        List<Integer> expectedOutput = Arrays.asList(2, 3);
 
         assertEquals(expectedOutput, sieve.getPrimes());
     }
