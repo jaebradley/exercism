@@ -2,14 +2,12 @@ public class Acronym {
   public static String generate(final String phrase) {
     final StringBuilder sb = new StringBuilder();
     int index = 0;
-    String substring = phrase;
     while (index < phrase.length()) {
       if (Character.isAlphabetic(phrase.charAt(index))) {
         sb.append(phrase.charAt(index));
       }
 
-      index += getRelativeIndexForNextAcronymCharacter(substring);
-      substring = phrase.substring(index);
+      index += getRelativeIndexForNextAcronymCharacter(phrase.substring(index));
     }
     return sb.toString().toUpperCase();
   }
